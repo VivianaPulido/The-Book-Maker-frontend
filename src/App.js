@@ -1,4 +1,11 @@
 import './App.css';
+
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch
+} from 'react-router-dom'
+
 import NavBar from './components/NavBar'
 import Landing from './components/Landing'
 import Signup from './components/Signup'
@@ -8,15 +15,21 @@ import Calculadora from './components/Calculadora'
 import Servicios from './components/Servicios'
 import Tienda from './components/Tienda'
 import Privacidad from './components/Privacidad'
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch
-} from 'react-router-dom'
+import MiPerfil from './components/MiPerfil'
+
+import AuthState from './context/autenticacion/AuthState'
+import AlertaState from './context/alertas/AlertaState'
+
+import tokenAuth from './config/token'
+
+
 
 function App() {
   return (
-    <>   
+    <>
+
+    <AlertaState> 
+    <AuthState>
       <Router>
         <NavBar />
 
@@ -27,11 +40,14 @@ function App() {
           <Route exact path="/calculadora" component={Calculadora} />
           <Route exact path="/servicios" component={Servicios} />
           <Route exact path="/tienda" component={Tienda} />
+          <Route exact path="/mis-obras" component={MiPerfil} />
           <Route exact path="/aviso-de-privacidad" component={Privacidad} />
         </Switch>
 
         <Footer />
       </Router>
+      </AuthState>
+      </AlertaState>  
      
     </>
   );

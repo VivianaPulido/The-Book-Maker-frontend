@@ -3,7 +3,12 @@ import axios from 'axios'
 
 export default function BookOptions() {
 
+    const [coverImg, setCoverImg] = useState()
+    const [file, setFile] = useState()
+
+
     const [book, setBook] = useState({
+        typeOfProd: "Book",
         size:"",
         words:"",
         color:"",
@@ -13,11 +18,11 @@ export default function BookOptions() {
         soporte:"",
         price:"",
         title:"",
-        // fileName:"", //creo que se setea en el back
-        filePath:"",
-        //coverImgName:"", //creo que se setea en el back
+        // fileName:"", 
+        //filePath:"",
+        //coverImgName:"",
         coverImgPath:"",
-        synopsis:""
+        author:""
     })
 
     function handleChange(event){
@@ -28,8 +33,44 @@ export default function BookOptions() {
     }
     console.log(book)
 
+    function handleCoverImg(event){
+        console.log(event.target.files[0])
+        setCoverImg(
+            event.target.files[0]
+        )    
+    }
+
+    function handleFile(event){
+        console.log(event.target.files[0])
+        setFile(
+            event.target.files[0]
+        )    
+    }
+
+    async function urlCloudinary (e){
+        e.preventDefault()
+        const data= new FormData()
+        data.append("file", coverImg)
+        data.append("upload_preset", "book-maker")
+        data.append("cloud_name", "dd4wq0tnf")
+
+        const dataFile= new FormData()
+        dataFile.append("file", file)
+        dataFile.append("upload_preset", "book-maker")
+        dataFile.append("cloud_name", "dd4wq0tnf")
+        const respuesta= await axios.post('https://api.cloudinary.com/v1_1/dd4wq0tnf/image/upload', data)
+        const respuesta1= await axios.post('https://api.cloudinary.com/v1_1/dd4wq0tnf/image/upload', dataFile) 
+        
+        setBook({
+            ...book,
+            coverImgPath: respuesta.data.url,
+            filePath: respuesta1.data.url
+        })
+    }
+
    
-    function calculatePrice(book){
+    function calculatePrice(book, e){
+        e.preventDefault()
         let wordsPerPage
         let pricePerPage
         let soportePrice
@@ -43,13 +84,15 @@ export default function BookOptions() {
 
         const price= book.words / wordsPerPage * pricePerPage + coverPrice + soportePrice + bindingPrice
 
-        // setBook({
-        //     ...book,
-        //     price: price
-        // })
+        setBook({
+            ...book,
+            price: price
+        })
 
-        return price
+        return false
     }
+
+   
 
     const sendNewBook= async() => {
         const uploadBook= await axios.post("http://localhost:3001/crear-libro", book)
@@ -66,8 +109,9 @@ export default function BookOptions() {
                 <form onSubmit= {() => sendNewBook()}>
 
                     <div class="flex p-2">
-                        <label>Tamaño: </label>
-                        <select name="size" onChange={(event)=> handleChange(event)}>
+                    <p>Tamaños</p>
+                        <label>Formato: </label>
+                        <select name="size" onChange={(event)=> handleChange(event)} class="">
                             <option value="pocket">Pocket: 10.5x17 cm</option>
                             <option value="travel">Travel: 14x21 cm</option>
                             <option value="standard">Standard: 17x21 cm</option>
@@ -113,25 +157,26 @@ export default function BookOptions() {
                     <label>Portada semi-rígida</label>
                     <input onChange={(event)=> handleChange(event)} type="radio" name="soporte" value="semirigida"/>
 
-                    <h3>Costo por ejemplar: ${calculatePrice(book)}.00</h3>
-                    {/* <button onClick={calculatePrice(book)}>Calcular</button>
-                    <h3>Costo por ejemplar: ${book.price}.00</h3> */}
+                    {/* <h3>Costo por ejemplar: ${calculatePrice(book)}.00</h3> */}
+                    <button onClick={(e)=>calculatePrice(book, e)}>Calcular</button>
+                    <h3>Costo por ejemplar: ${book.price}.00</h3>
                     
-                    <p>¿Te convence? ¡Sube tus archivos y haz tu pedido ahora!</p>
+                    <p>¿Te convence?</p>
+                    <h2 class="text-white text-xl my-5 bg-blue-600 p-2">Paso 3: ¡Sube tus archivos y haz tu pedido ahora!</h2>
 
                     <label>Título de tu Libro:</label>
                     <input onChange={(event)=> handleChange(event)} type="text" name="title"/>
 
                     <label>Sube el archivo de tu portada:</label>
-                    <input onChange={(event)=> handleChange(event)} type="file" name="coverImgPath"/>
+                    <input  onChange={(event)=> handleCoverImg(event)} type="file" name="coverImgPath"/>
 
                     <label>Sube el archivo del texto original:</label>
-                    <input onChange={(event)=> handleChange(event)} type="file" name="filePath"/>
+                    <input onChange={(event)=> handleFile(event)} type="file" name="filePath"/>
 
                     <label>Sinopsis:</label>
                     <textarea onChange={(event)=> handleChange(event)} type="text" name="synopsis"></textarea>
 
-                    <button type="submit">Crear Libro</button>
+                    <button type="submit" onClick={ (e)=> urlCloudinary(e)}>Crear Libro</button>
                     
                 </form>
 
