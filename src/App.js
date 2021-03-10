@@ -16,6 +16,7 @@ import Servicios from './components/Servicios'
 import Tienda from './components/Tienda'
 import Privacidad from './components/Privacidad'
 import MiPerfil from './components/MiPerfil'
+import Edicion from './components/Edición'
 
 import AuthState from './context/autenticacion/AuthState'
 import AlertaState from './context/alertas/AlertaState'
@@ -42,6 +43,7 @@ function App() {
           <Route exact path="/tienda" component={Tienda} />
           <Route exact path="/mis-obras" component={MiPerfil} />
           <Route exact path="/aviso-de-privacidad" component={Privacidad} />
+          <Route exact path="/mis-obras/:id" component={Edicion} />
         </Switch>
 
         <Footer />

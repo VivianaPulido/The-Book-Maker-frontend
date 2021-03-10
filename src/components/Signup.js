@@ -159,32 +159,32 @@ export default function Signup(props) {
                     </div>
                 )
             : null}
-            <div class="flex items-center min-h-screen bg-white dark:bg-gray-900">   
-                <div class="container mx-auto">
-                     <div class="max-w-md mx-auto my-10">
-                         <div class="text-center">
-                            <h1 class="my-3 text-3xl font-semibold text-gray-700 dark:text-gray-200">Signup</h1>
-                            <p class="text-gray-500 dark:text-gray-400">Crea una cuenta</p>
+            <div className="flex items-center min-h-screen bg-white dark:bg-gray-900">   
+                <div className="container mx-auto">
+                     <div className="max-w-md mx-auto my-10">
+                         <div className="text-center">
+                            <h1 className="my-3 text-3xl font-semibold text-gray-700 dark:text-gray-200">Signup</h1>
+                            <p className="text-gray-500 dark:text-gray-400">Crea una cuenta</p>
                          </div>
 
                          <div className="m-7">
                             <form onSubmit={onSubmit}>
-                                <div class="mb-6">
+                                <div className="mb-6">
                                 <label htmlFor="username" className="block mb-2 text-sm text-gray-600 dark:text-gray-400">Nombre:</label>
                                 <input type="text" id="username" name="username" placeholder="tu Nombre" value={username} onChange={onChange} className="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"/>
                                 </div>
 
-                                <div class="mb-6">
+                                <div className="mb-6">
                                 <label htmlFor="email" className="block mb-2 text-sm text-gray-600 dark:text-gray-400">Email:</label>
                                 <input type="email" id="email" name="email" placeholder="nombre@email.com" value={email} onChange={onChange} className="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"/>
                                 </div>
 
-                                <div class="mb-6">
+                                <div className="mb-6">
                                 <label htmlFor="password" className="block mb-2 text-sm text-gray-600 dark:text-gray-400">Contraseña:</label>
                                 <input type="password" id="password" name="password" placeholder="****" onChange={onChange} value={password} className="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"/>
                                 </div>
 
-                                <div class="mb-6">
+                                <div className="mb-6">
                                 <label htmlFor="confirmar" className="block mb-2 text-sm text-gray-600 dark:text-gray-400">Confirmación contraseña:</label>
                                 <input type="password" id="confirmar" name="confirmar" placeholder="Repite tu contraseña" onChange={onChange} value={confirmar} className="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"/>
                                 </div>

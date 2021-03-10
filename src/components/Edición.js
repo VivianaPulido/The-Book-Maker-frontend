@@ -1,28 +1,15 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom'
 import axios from 'axios'
 
-export default function BookOptions() {
+export default function Edición() {
+
+    const { id } = useParams()
 
     const [coverImg, setCoverImg] = useState()
     const [file, setFile] = useState()
 
-
-    const [book, setBook] = useState({
-        typeOfProd: "Book",
-        size:"",
-        words:"",
-        pages:"",
-        color:"",
-        paper:"",
-        binding:"",
-        cover:"",
-        soporte:"",
-        price:"",
-        title:"", 
-        filePath:"",
-        coverImgPath:"",
-        author:""
-    })
+    const [book, setBook] = useState()//¿Cómo hago para traerme los valores del estado anterior?
 
     function handleChange(event){
         setBook({
@@ -30,7 +17,7 @@ export default function BookOptions() {
             [event.target.name]: event.target.value
         })
     }
-    console.log(book)
+    
 
     function handleCoverImg(event){
         console.log(event.target.files[0])
@@ -67,7 +54,8 @@ export default function BookOptions() {
         })
     }
 
-   
+
+
     function calculatePrice(book, e){
         e.preventDefault()
         let wordsPerPage
@@ -93,27 +81,32 @@ export default function BookOptions() {
         return false
     }
 
-    const service = axios.create({
-        baseURL: "http://localhost:3001",
-        withCredentials: true,
-      });
 
-    const sendNewBook= async(e) => {
-        e.preventDefault()
-        const token= localStorage.getItem("token")
-        const uploadBook= await service.post("http://localhost:3001/crear-libro", book, {headers:{'x-auth-token': token}})
-        //como los mando desde aqui a su perfil?? era con history no se que
-        console.log(uploadBook)
-    }
+    // const service = axios.create({
+    //     baseURL: "http://localhost:3001",
+    //     withCredentials: true,
+    //   });
 
+    useEffect(() => {
+        const editBook = async (bookId) => {
+            const res = await axios.post(`https://localhost:3001/mis-obras/${bookId}`)
+            const foundBook = await res.data.libros
+        
+            setBook({
+                
+            })
+        }
+        editBook(id)
+    },[])
 
     return (
         <>
-     
-            <div className="mx-10">
+
+<div className="mx-10">
                 <h2 className="text-white text-xl my-5 bg-blue-600 p-2">Paso 2: Selecciona Opciones de Impresión para tu Libro</h2>
 
-                <form onSubmit= {(event) => sendNewBook(event)}>
+                {/* <form onSubmit= {(event) => sendNewBook(event)}> */}
+                <form>
 
                     <div className="items-center">
                         <label className="block m-2 text-base text-gray-600 dark:text-gray-400">Formato: </label>
@@ -219,14 +212,14 @@ export default function BookOptions() {
                     <textarea onChange={(event)=> handleChange(event)} type="text" name="synopsis"></textarea>
 
                     {/* <button type="submit" onClick={ (e)=> urlCloudinary(e)}>Crear Libro</button> */}
-                    <button type="submit">Crear Libro</button>
+                    {/* <button type="submit" onSubmit= {(event) => sendNewBook(event)}>Crear Libro</button> */}
                     
                 </form>
                 
                 <p>Si crees que tu proyecto se sale de los estándares, contáctanos! Nuestro equipo multidisciplinario cuenta con profesionales que te pueden ayudar con corrección de estilo, retoque fotográfico, ilustración, diseño editorial, registro de propiedad intelectual y más. ¡Déjanos ayudarte a traer a la vida tu creación!</p>
                 <button>Agenda una cita</button>
             </div>
-           
+            
         </>
     )
 }

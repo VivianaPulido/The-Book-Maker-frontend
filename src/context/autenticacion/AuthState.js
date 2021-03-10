@@ -63,7 +63,7 @@ const AuthState = props => {
         }
 
         try {
-            const respuesta = await clienteAxios.get('/api/auth')//NO ENTIENDO BIEN QUE HACE ESTO, QUE RUTA LE PONGO
+            const respuesta = await clienteAxios.get('/login')//NO ENTIENDO BIEN QUE HACE ESTO, QUE RUTA LE PONGO
 
             dispatch({
                 type: OBTENER_USUARIO,
@@ -83,7 +83,7 @@ const AuthState = props => {
     const iniciarSesion = async datos => {
         try{
             const respuesta = await clienteAxios.post('/login', datos)
-            
+            console.log(respuesta.data.token)
             dispatch({
                 type: LOGIN_EXITOSO,
                 payload: respuesta.data

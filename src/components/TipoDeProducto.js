@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 
 import BookOptions from './BookOptions'
 import MagazineOptions from './MagazineOptions'
@@ -6,10 +6,14 @@ import ComicOptions from './ComicOptions'
 import bookImg from '../images/Captura de Pantalla 2021-03-07 a la(s) 14.39.26.png'
 import magImg from '../images/Captura de Pantalla 2021-03-07 a la(s) 14.40.24.png'
 import comicImg from '../images/Captura de Pantalla 2021-03-07 a la(s) 14.39.49.png'
+import AuthContext from '../context/autenticacion/AuthContext'
 
 //import uploadCloud from '../config/cloudinary'
 
 export default function TipoDeProducto() {
+
+    const authContext= useContext(AuthContext)
+    const {usuario, usuarioAutenticado} = authContext
 
     const [typeOfProd, setTypeOfProd] = useState("book")
     
@@ -32,7 +36,7 @@ export default function TipoDeProducto() {
     return (
         <>
         <div className="mx-10">
-            <h2 class="text-white text-xl my-5 bg-blue-600 p-2">Paso 1: Selecciona el tipo de producto que quieres imprimir</h2>
+            <h2 className="text-white text-xl my-5 bg-blue-600 p-2">Paso 1: Selecciona el tipo de producto que quieres imprimir</h2>
             <form className= "flex">
             <div className="flex-auto contenerdorTipoProd">
                 <img src={bookImg}/>
@@ -45,7 +49,7 @@ export default function TipoDeProducto() {
 
             <div className="flex-auto contenerdorTipoProd">
                 <img src={magImg}/>
-                <div class="flex items-center my-5" >      
+                <div className="flex items-center my-5" >      
                     <input onChange={(event)=> handleChange(event)} type="radio" name="typeOfProd" value="magazine"/>
                     <p className="text-gray-600 mx-2 text-xl">Revista</p>   
                 </div> 
@@ -54,7 +58,7 @@ export default function TipoDeProducto() {
 
             <div className="flex-auto contenerdorTipoProd">
                 <img src={comicImg}/>
-                <div class="flex items-center my-5" >
+                <div className="flex items-center my-5" >
                     <input onChange={(event)=> handleChange(event)} type="radio" name="typeOfProd" value="comic"/>  
                     <p className="text-gray-600 mx-2 text-xl">Comic</p>
                 </div> 

@@ -12,6 +12,14 @@ export default (state, action) => {
     switch(action.type){
 
         case LOGIN_EXITOSO:
+            console.log(action.payload.token)
+            localStorage.setItem('token', action.payload.token)
+            localStorage.setItem("hola", "adios")
+            return{
+                ...state,
+                autenticado: true,
+                mensaje: null
+            }
         case REGISTRO_EXITOSO:
             localStorage.setItem('token', action.payload.token)
 
