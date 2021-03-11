@@ -43,7 +43,7 @@ function App() {
           <Route exact path="/tienda" component={Tienda} />
           <Route exact path="/mis-obras" component={MiPerfil} />
           <Route exact path="/aviso-de-privacidad" component={Privacidad} />
-          <Route exact path="/mis-obras/:id" component={Edicion} />
+          <Route exact path="/editar/:id" component={Edicion} />
         </Switch>
 
         <Footer />

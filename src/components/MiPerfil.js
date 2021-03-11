@@ -19,8 +19,8 @@ export default function MiPerfil() {
     useEffect(async() => {
         const token= localStorage.getItem("token")
         const respuesta= await service.get("/mis-obras", {headers:{'x-auth-token': token}})
-        console.log(respuesta)
-        console.log(respuesta.data)
+        // console.log(respuesta)
+        // console.log(respuesta.data)
         setlibros(respuesta.data.libros)
     }, [deleteBook])
 
@@ -29,6 +29,7 @@ export default function MiPerfil() {
        console.log(id)
         const token= localStorage.getItem("token")
         const deleted= await service.delete(`/eliminar/${id}`, {headers:{'x-auth-token': token}})
+        setlibros([])
     }
   
 
@@ -65,7 +66,7 @@ export default function MiPerfil() {
 
                     <h2>Precio por ejemplar: {e.price}</h2>
                     <p>Id: {e._id}</p>
-                    <Link to={`/mis-obras/${e._id}`}>Editar</Link>
+                    <Link to={`/editar/${e._id}`}>Editar</Link>
                     <button onClick={(evento) => deleteBook(e._id, evento)}>Eliminar</button> 
                     <form>
                 

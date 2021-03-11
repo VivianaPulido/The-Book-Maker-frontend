@@ -22,3 +22,43 @@ code {
   padding: 15px;
   border-radius: 2px;
 }
+
+.contenerdorOpcionesA{
+  background-color: rgb(229, 229, 237);
+  padding: 15px;
+  border-radius: 2px;
+}
+
+
+.contenerdorOpcionesB{
+  background-color: rgb(237, 237, 250);
+  padding: 15px;
+  border-radius: 2px;
+}
+
+.custom-file-input::-webkit-file-upload-button {
+  visibility: hidden;
+}
+.custom-file-input::before {
+  content: 'Selecciona un archivo...';
+  color: white;
+  display: inline-block;
+  border: 1px solid rgb(209, 213, 219);
+  border-radius: 5px;
+  padding: 7px 10px;
+  outline: none;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  cursor: pointer;
+  background-color: rgba(59, 130, 246); 
+}
+
+.gradient {
+  background: linear-gradient(90deg, #d53369 0%, #daae51 100%);
+}
+
+
+
+.landingText{
+  text-align: center;
+}

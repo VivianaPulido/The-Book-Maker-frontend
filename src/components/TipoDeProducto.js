@@ -36,7 +36,7 @@ export default function TipoDeProducto() {
     return (
         <>
         <div className="mx-10">
-            <h2 className="text-white text-xl my-5 bg-blue-600 p-2">Paso 1: Selecciona el tipo de producto que quieres imprimir</h2>
+            <h2 className="text-white text-xl my-5 bg-blue-500 p-2">Paso 1: Selecciona el tipo de producto que quieres imprimir</h2>
             <form className= "flex">
             <div className="flex-auto contenerdorTipoProd">
                 <img src={bookImg}/>

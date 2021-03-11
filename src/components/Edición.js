@@ -4,12 +4,60 @@ import axios from 'axios'
 
 export default function Edición() {
 
-    const { id } = useParams()
+     //Estado del libro que intento editar
+     const [book, setBook] = useState({ //
+        typeOfProd: "Book",
+        size: "",
+        words: "",
+        pages: "",
+        color: "",
+        paper: "",
+        binding: "",
+        cover: "",
+        soporte: "",
+        price: "",
+        title: "", 
+        filePath: "",
+        coverImgPath: "",
+    
+    })
 
-    const [coverImg, setCoverImg] = useState()
-    const [file, setFile] = useState()
+    //traer los datos del libro especifico que quiero editar
 
-    const [book, setBook] = useState()//¿Cómo hago para traerme los valores del estado anterior?
+    const service = axios.create({
+        baseURL: "http://localhost:3001",
+        withCredentials: true,
+      });
+
+      const { id } = useParams()
+
+
+    useEffect(async() => {
+        const token= localStorage.getItem("token")
+        const respuesta= await service.get(`/detalles/${id}`, {headers:{'x-auth-token': token}})
+        console.log(respuesta)
+        console.log(respuesta.data)
+
+        setBook({
+            size: respuesta.data.libro.size,
+            words: respuesta.data.libro.words,
+            pages: respuesta.data.libro.pages,
+            color: respuesta.data.libro.color,
+            paper: respuesta.data.libro.pages,
+            binding: respuesta.data.libro.binding,
+            cover: respuesta.data.libro.cover,
+            soporte: respuesta.data.libro.soporte,
+            price: respuesta.data.libro.price,
+            title: respuesta.data.libro.title, 
+            filePath: respuesta.data.libro.filePath,
+            coverImgPath: respuesta.data.libro.coverImg,
+        })
+    }, [])
+
+
+     //Estado para manejar los archivos de cloudinary    
+     const [coverImg, setCoverImg] = useState()
+     const [file, setFile] = useState()
 
     function handleChange(event){
         setBook({
@@ -18,7 +66,7 @@ export default function Edición() {
         })
     }
     
-
+    //funciones para manejar los inputs de cloudinary
     function handleCoverImg(event){
         console.log(event.target.files[0])
         setCoverImg(
@@ -33,6 +81,7 @@ export default function Edición() {
         )    
     }
 
+    //funcion para subir los archivos a cloudinary y obtener urls y etear estado
     async function urlCloudinary (e){
         e.preventDefault()
         const data= new FormData()
@@ -55,7 +104,7 @@ export default function Edición() {
     }
 
 
-
+    //funcion para calcular el precio
     function calculatePrice(book, e){
         e.preventDefault()
         let wordsPerPage
@@ -81,32 +130,27 @@ export default function Edición() {
         return false
     }
 
-
-    // const service = axios.create({
-    //     baseURL: "http://localhost:3001",
-    //     withCredentials: true,
-    //   });
-
-    useEffect(() => {
+//funcion para hacer la edicion del libro    
         const editBook = async (bookId) => {
-            const res = await axios.post(`https://localhost:3001/mis-obras/${bookId}`)
+            const token= localStorage.getItem("token")
+            const res = await service.put(`http://localhost:3001/mis-obras/${bookId}`, book, {headers:{'x-auth-token': token}})
             const foundBook = await res.data.libros
         
             setBook({
                 
             })
         }
-        editBook(id)
-    },[])
+       
+    
 
     return (
         <>
 
 <div className="mx-10">
-                <h2 className="text-white text-xl my-5 bg-blue-600 p-2">Paso 2: Selecciona Opciones de Impresión para tu Libro</h2>
+                <h2 className="text-white text-xl my-5 bg-blue-600 p-2">Edita tu Libro</h2>
 
-                {/* <form onSubmit= {(event) => sendNewBook(event)}> */}
-                <form>
+                <form onSubmit= {()=>(editBook(id))}>
+                
 
                     <div className="items-center">
                         <label className="block m-2 text-base text-gray-600 dark:text-gray-400">Formato: </label>
@@ -121,7 +165,7 @@ export default function Edición() {
                     </div>
 
                     <lablel className="block m-2 text-base text-gray-600 dark:text-gray-400">Número de palabras en tu escrito:</lablel>
-                    <input onChange={(event)=> handleChange(event)} type="number" name="words" className="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"></input>
+                    <input onChange={(event)=> handleChange(event)} type="number" min="0" value={book.words} name="words" className="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"></input>
 
                     <p className="block m-2 text-base text-gray-600 dark:text-gray-400">Color en  Interiores:</p>
                     <div className="flex">
@@ -200,7 +244,7 @@ export default function Edición() {
                     <h2 className="text-white text-xl my-5 bg-blue-600 p-2">Paso 3: ¡Sube tus archivos y haz tu pedido ahora!</h2>
 
                     <label className="block m-2 text-base text-gray-600 dark:text-gray-400">Título de tu Libro:</label>
-                    <input onChange={(event)=> handleChange(event)} type="text" name="title" className="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"/>
+                    <input onChange={(event)=> handleChange(event)} type="text" name="title" value={book.title} className="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"/>
 
                     <label>Sube el archivo de tu portada:</label>
                     <input  onChange={(event)=> handleCoverImg(event)} type="file" name="coverImgPath"/>
@@ -212,7 +256,7 @@ export default function Edición() {
                     <textarea onChange={(event)=> handleChange(event)} type="text" name="synopsis"></textarea>
 
                     {/* <button type="submit" onClick={ (e)=> urlCloudinary(e)}>Crear Libro</button> */}
-                    {/* <button type="submit" onSubmit= {(event) => sendNewBook(event)}>Crear Libro</button> */}
+                    <button type="submit">Editar Libro</button>
                     
                 </form>
                 

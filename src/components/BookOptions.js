@@ -81,8 +81,8 @@ export default function BookOptions() {
         book.soporte === "rigido" ? soportePrice= 25 : soportePrice= 20 
         book.binding === "hotmelt" ? bindingPrice= 50 : book.binding === "engrapado" ? bindingPrice= 15 : book.binding === "engargoladoMetal" ? bindingPrice= 25 : bindingPrice= 25
 
-        const pages= book.words/ wordsPerPage
-        const price= book.words / wordsPerPage * pricePerPage + coverPrice + soportePrice + bindingPrice
+        const pages= Math.round(book.words/ wordsPerPage)
+        const price= (book.words / wordsPerPage * pricePerPage + coverPrice + soportePrice + bindingPrice).toFixed(2)
 
         setBook({
             ...book,
@@ -111,13 +111,13 @@ export default function BookOptions() {
         <>
      
             <div className="mx-10">
-                <h2 className="text-white text-xl my-5 bg-blue-600 p-2">Paso 2: Selecciona Opciones de Impresión para tu Libro</h2>
+                <h2 className="text-white text-xl my-5 bg-blue-500 p-2">Paso 2: Selecciona Opciones de Impresión para tu Libro</h2>
 
                 <form onSubmit= {(event) => sendNewBook(event)}>
 
-                    <div className="items-center">
-                        <label className="block m-2 text-base text-gray-600 dark:text-gray-400">Formato: </label>
-                        <select name="size" onChange={(event)=> handleChange(event)} className="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500">
+                    <div className="items-center contenerdorOpcionesA">
+                        <label className="block mb-2 text-base text-gray-600 dark:text-gray-400">Formato: </label>
+                        <select name="size" onChange={(event)=> handleChange(event)} className="w-full px-3 py-2 mb-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500">
                             <option value="Pocket">Selecciona un formato</option>
                             <option value="Pocket">Pocket: 10.5x17 cm</option>
                             <option value="Travel">Travel: 14x21 cm</option>
@@ -127,104 +127,111 @@ export default function BookOptions() {
                         </select>
                     </div>
 
-                    <lablel className="block m-2 text-base text-gray-600 dark:text-gray-400">Número de palabras en tu escrito:</lablel>
-                    <input onChange={(event)=> handleChange(event)} type="number" name="words" className="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"></input>
+                    <div className="contenerdorOpcionesB">
+                        <lablel className="block mb-2 text-base text-gray-600 dark:text-gray-400 ">Número de palabras en tu escrito:</lablel>
+                        <input onChange={(event)=> handleChange(event)} type="number" name="words" className="w-full px-3 py-2 mb-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"></input>
+                    </div>
 
-                    <p className="block m-2 text-base text-gray-600 dark:text-gray-400">Color en  Interiores:</p>
-                    <div className="flex">
-                        <div className="flex items-center mx-2">
-                            <input onChange={(event)=> handleChange(event)} type="radio" name="color" value="Blanco y Negro"/>
-                            <label className="block m-2 text-base dark:text-gray-400">Blanco y Negro</label>
-                        </div>
-                        <div className="flex items-center mx-2">
-                            <input onChange={(event)=> handleChange(event)} type="radio" name="color" value="Fullcolor"/>
-                            <label className="block m-2 text-base dark:text-gray-400">Full Color</label>
-                        </div>
-                        <div className="flex items-center mx-2">
-                            <input onChange={(event)=> handleChange(event)}type="radio" name="color" value="Mixto"/>
-                            <label className="block m-2 text-base dark:text-gray-400" >Mixto</label>
+                    <div className="contenerdorOpcionesA">
+                        <p className="block  text-base text-gray-600 dark:text-gray-400">Color en  Interiores:</p>
+                        <div className="flex">
+                            <div className="flex items-center mx-2">
+                                <input onChange={(event)=> handleChange(event)} type="radio" name="color" value="Blanco y Negro"/>
+                                <label className="block m-2 text-base dark:text-gray-400">Blanco y Negro</label>
+                            </div>
+                            <div className="flex items-center mx-2">
+                                <input onChange={(event)=> handleChange(event)} type="radio" name="color" value="Fullcolor"/>
+                                <label className="block m-2 text-base dark:text-gray-400">Full Color</label>
+                            </div>
+                            <div className="flex items-center mx-2">
+                                <input onChange={(event)=> handleChange(event)}type="radio" name="color" value="Mixto"/>
+                                <label className="block m-2 text-base dark:text-gray-400" >Mixto</label>
+                            </div>
                         </div>
                     </div>
 
-                    <p className="block m-2 text-base text-gray-600 dark:text-gray-400">Papel:</p>
-                    <div className="flex">
-                        <div className="flex items-center mx-2">
-                            <input onChange={(event)=> handleChange(event)} type="radio" name="paper" value="Bond blanco 90 gr."/>
-                            <label className="block m-2 text-base dark:text-gray-400">Bond Blanco 90g</label>
-                        </div>  
-                        <div className="flex items-center mx-2"> 
-                            <input onChange={(event)=> handleChange(event)} type="radio" name="paper" value="Bond color marfil 90 gr."/>
-                            <label className="block m-2 text-base dark:text-gray-400">Bond Marfil 90gr</label>
-                        </div> 
-                    </div>
-
-                    <p className="block m-2 text-base text-gray-600 dark:text-gray-400">Encuadernado</p>
-                    <div className="flex">
-                        <div className="flex items-center mx-2">
-                            <input onChange={(event)=> handleChange(event)} type="radio" name="binding" value="Hotmelt"/>
-                            <label className="block m-2 text-base dark:text-gray-400">Hotmelt (americano)</label>
-                        </div>
-                        <div className="flex items-center mx-2">
-                            <input onChange={(event)=> handleChange(event)} type="radio" name="binding" value="Engrapado a lomo"/>
-                            <label className="block m-2 text-base dark:text-gray-400">Engrapado a lomo</label>
-                        </div>
-                        <div className="flex items-center mx-2">
-                            <input onChange={(event)=> handleChange(event)} type="radio" name="binding" value="Engargolado metálico"/>
-                            <label className="block m-2 text-base dark:text-gray-400">Engargolado Metálico</label>
-                        </div>
-                        <div className="flex items-center mx-2">
-                            <input onChange={(event)=> handleChange(event)} type="radio" name="binding" value="Engargolado plástico"/>
-                            <label className="block m-2 text-base dark:text-gray-400">Engargolado Plástico</label>
+                    <div className="contenerdorOpcionesB">
+                        <p className="block m-2 text-base text-gray-600 dark:text-gray-400">Papel:</p>
+                        <div className="flex">
+                            <div className="flex items-center mx-2">
+                                <input onChange={(event)=> handleChange(event)} type="radio" name="paper" value="Bond blanco 90 gr."/>
+                                <label className="block m-2 text-base dark:text-gray-400">Bond Blanco 90g</label>
+                            </div>  
+                            <div className="flex items-center mx-2"> 
+                                <input onChange={(event)=> handleChange(event)} type="radio" name="paper" value="Bond color marfil 90 gr."/>
+                                <label className="block m-2 text-base dark:text-gray-400">Bond Marfil 90gr</label>
+                            </div> 
                         </div>
                     </div>
 
-                    <p className="block m-2 text-base text-gray-600 dark:text-gray-400">Acabado de Portada</p>
-                    <div className="flex">
-                        <div className="flex items-center mx-2">
-                            <input onChange={(event)=> handleChange(event)} type="radio" name="cover" value="Brillante"/>
-                            <label className="block m-2 text-base dark:text-gray-400">Brillante</label>
-                        </div>
-                        <div className="flex items-center mx-2">
-                            <input onChange={(event)=> handleChange(event)} type="radio" name="cover" value="Mate"/>
-                            <label className="block m-2 text-base dark:text-gray-400">Mate</label>
-                        </div>
-                        <div className="flex items-center mx-2">
-                            <input onChange={(event)=> handleChange(event)} type="radio" name="soporte" value="Rigido"/>
-                            <label className="block m-2 text-base dark:text-gray-400">Portada rígida</label>
-                        </div>
-                        <div className="flex items-center mx-2">
-                            <input onChange={(event)=> handleChange(event)} type="radio" name="soporte" value="Semirigido"/>
-                            <label className="block m-2 text-base dark:text-gray-400">Portada semi-rígida</label>
+                    <div className="contenerdorOpcionesA">
+                        <p className="block m-2 text-base text-gray-600 dark:text-gray-400">Encuadernado</p>
+                        <div className="flex">
+                            <div className="flex items-center mx-2">
+                                <input onChange={(event)=> handleChange(event)} type="radio" name="binding" value="Hotmelt"/>
+                                <label className="block m-2 text-base dark:text-gray-400">Hotmelt (americano)</label>
+                            </div>
+                            <div className="flex items-center mx-2">
+                                <input onChange={(event)=> handleChange(event)} type="radio" name="binding" value="Engrapado a lomo"/>
+                                <label className="block m-2 text-base dark:text-gray-400">Engrapado a lomo</label>
+                            </div>
+                            <div className="flex items-center mx-2">
+                                <input onChange={(event)=> handleChange(event)} type="radio" name="binding" value="Engargolado metálico"/>
+                                <label className="block m-2 text-base dark:text-gray-400">Engargolado Metálico</label>
+                            </div>
+                            <div className="flex items-center mx-2">
+                                <input onChange={(event)=> handleChange(event)} type="radio" name="binding" value="Engargolado plástico"/>
+                                <label className="block m-2 text-base dark:text-gray-400">Engargolado Plástico</label>
+                            </div>
                         </div>
                     </div>
 
-                    <div className="flex items-center">   
-                    <button onClick={(e)=>calculatePrice(book, e)} className=" mt-3 px-3 py-3 text-white bg-blue-600 rounded-md focus:bg-indigo-600 focus:outline-none">Calcular Precio</button>
-                    <h3 className="mx-5 text-2xl">Precio por Ejemplar: ${book.price}.00</h3>
+                    <div className="contenerdorOpcionesB">
+                        <p className="block m-2 text-base text-gray-600 dark:text-gray-400">Acabado de Portada</p>
+                        <div className="flex">
+                            <div className="flex items-center mx-2">
+                                <input onChange={(event)=> handleChange(event)} type="radio" name="cover" value="Brillante"/>
+                                <label className="block m-2 text-base dark:text-gray-400">Brillante</label>
+                            </div>
+                            <div className="flex items-center mx-2">
+                                <input onChange={(event)=> handleChange(event)} type="radio" name="cover" value="Mate"/>
+                                <label className="block m-2 text-base dark:text-gray-400">Mate</label>
+                            </div>
+                            <div className="flex items-center mx-2">
+                                <input onChange={(event)=> handleChange(event)} type="radio" name="soporte" value="Rigido"/>
+                                <label className="block m-2 text-base dark:text-gray-400">Portada rígida</label>
+                            </div>
+                            <div className="flex items-center mx-2">
+                                <input onChange={(event)=> handleChange(event)} type="radio" name="soporte" value="Semirigido"/>
+                                <label className="block m-2 text-base dark:text-gray-400">Portada semi-rígida</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="items-center">   
+                    <button onClick={(e)=>calculatePrice(book, e)} className=" mt-3 mb-2 px-3 py-3 text-white bg-blue-500 rounded-md focus:bg-blue-600 focus:outline-none">Calcular Precio</button>
+                    <h3 className="mt-2 text-2xl text-white bg-green-400 py-3 px-2">Precio por Ejemplar: ${book.price}</h3>
                     </div> 
                     
-                    <p className="m-4">¿Te convence?</p>
-                    <h2 className="text-white text-xl my-5 bg-blue-600 p-2">Paso 3: ¡Sube tus archivos y haz tu pedido ahora!</h2>
+                    <h2 className="text-white text-xl my-5 bg-blue-500 p-2">Paso 3: ¿Te convence? ¡Sube tus archivos y haz tu pedido ahora!</h2>
 
-                    <label className="block m-2 text-base text-gray-600 dark:text-gray-400">Título de tu Libro:</label>
-                    <input onChange={(event)=> handleChange(event)} type="text" name="title" className="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"/>
+                    <div className="contenerdorOpcionesB">
+                        <label className="block mb-2 text-base text-gray-600 dark:text-gray-400">Título de tu Libro:</label>
+                        <input onChange={(event)=> handleChange(event)} type="text" name="title" className="w-full px-3 py-2 mb-4 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"/>
 
-                    <label>Sube el archivo de tu portada:</label>
-                    <input  onChange={(event)=> handleCoverImg(event)} type="file" name="coverImgPath"/>
+                        <label className="block text-base text-gray-600 dark:text-gray-400">Sube el archivo de tu portada:</label>
+                        <input  onChange={(event)=> handleCoverImg(event)} type="file" name="coverImgPath" className="custom-file-input mb-4 mt-2"/><br/>
 
-                    <label>Sube el archivo del texto original:</label>
-                    <input onChange={(event)=> handleFile(event)} type="file" name="filePath"/>
-
-                    <label>Sinopsis:</label>
-                    <textarea onChange={(event)=> handleChange(event)} type="text" name="synopsis"></textarea>
-
+                        <label className="block text-base text-gray-600 dark:text-gray-400">Sube el archivo del texto original:</label>
+                        <input onChange={(event)=> handleFile(event)} type="file" name="filePath" className="custom-file-input mb-4 mt-2"/><br/>
+                    </div>
                     {/* <button type="submit" onClick={ (e)=> urlCloudinary(e)}>Crear Libro</button> */}
-                    <button type="submit">Crear Libro</button>
+                    <button type="submit" className=" mt-3 mb-5 px-3 py-3 text-white bg-green-400 rounded-md focus:bg-green-500 focus:outline-none">Crear Libro</button>
                     
                 </form>
                 
-                <p>Si crees que tu proyecto se sale de los estándares, contáctanos! Nuestro equipo multidisciplinario cuenta con profesionales que te pueden ayudar con corrección de estilo, retoque fotográfico, ilustración, diseño editorial, registro de propiedad intelectual y más. ¡Déjanos ayudarte a traer a la vida tu creación!</p>
-                <button>Agenda una cita</button>
+                {/* <p className="block mb-2 mt-4 text-base text-gray-600 dark:text-gray-400">Si crees que tu proyecto se sale de los estándares, contáctanos! Nuestro equipo multidisciplinario cuenta con profesionales que te pueden ayudar con corrección de estilo, retoque fotográfico, ilustración, diseño editorial, registro de propiedad intelectual y más. ¡Déjanos ayudarte a traer a la vida tu creación!</p>
+                <button>Agenda una cita</button> */}
             </div>
            
         </>
