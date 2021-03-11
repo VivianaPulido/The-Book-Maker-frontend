@@ -97,6 +97,7 @@ export default function ComicOptions() {
 
     const sendNewBook= async(e) => {
         e.preventDefault()
+        await urlCloudinary()
         const token= localStorage.getItem("token")
         const uploadBook= await service.post("http://localhost:3001/crear-libro", book, {headers:{'x-auth-token': token}})
         //como los mando desde aqui a su perfil?? era con history no se que
@@ -123,7 +124,7 @@ export default function ComicOptions() {
                     </div>
 
                     <div className="contenerdorOpcionesB">
-                        <lablel className="block mb-2 text-base text-gray-600 dark:text-gray-400 ">Número de páginas en tu escrito:</lablel>
+                        <lablel className="block mb-2 text-base text-gray-600 dark:text-gray-400 ">Número de páginas:</lablel>
                         <input onChange={(event)=> handleChange(event)} type="number" name="pages" className="w-full px-3 py-2 mb-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"></input>
                     </div>
 

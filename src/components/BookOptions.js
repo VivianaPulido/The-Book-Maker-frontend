@@ -1,7 +1,12 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import axios from 'axios'
+import { useHistory } from "react-router-dom";
+import AuthContext from '../context/autenticacion/AuthContext'
 
 export default function BookOptions() {
+
+    const authContext= useContext(AuthContext)
+    const {usuario} = authContext
 
     const [coverImg, setCoverImg] = useState()
     const [file, setFile] = useState()
@@ -47,7 +52,7 @@ export default function BookOptions() {
     }
 
     async function urlCloudinary (e){
-        e.preventDefault()
+       // e.preventDefault(e)
         const data= new FormData()
         data.append("file", coverImg)
         data.append("upload_preset", "book-maker")
@@ -57,14 +62,17 @@ export default function BookOptions() {
         dataFile.append("file", file)
         dataFile.append("upload_preset", "book-maker")
         dataFile.append("cloud_name", "dd4wq0tnf")
+
         const respuesta= await axios.post('https://api.cloudinary.com/v1_1/dd4wq0tnf/image/upload', data)
         const respuesta1= await axios.post('https://api.cloudinary.com/v1_1/dd4wq0tnf/image/upload', dataFile) 
-        
-        setBook({
+       console.log("esto si me da el url", respuesta.data.url)
+       setBook({
             ...book,
-            coverImgPath: respuesta.data.url,
+            //coverImgPath: respuesta.data.url,
+            coverImgPath: "Esto no se refleja",
             filePath: respuesta1.data.url
         })
+        console.log("no esta seteando", book)
     }
 
    
@@ -92,6 +100,7 @@ export default function BookOptions() {
 
         return false
     }
+    const history = useHistory()
 
     const service = axios.create({
         baseURL: "http://localhost:3001",
@@ -100,10 +109,18 @@ export default function BookOptions() {
 
     const sendNewBook= async(e) => {
         e.preventDefault()
+        if(usuario){
+        await urlCloudinary()
         const token= localStorage.getItem("token")
         const uploadBook= await service.post("http://localhost:3001/crear-libro", book, {headers:{'x-auth-token': token}})
-        //como los mando desde aqui a su perfil?? era con history no se que
-        console.log(uploadBook)
+        
+       history.push("/mis-obras") 
+        }else{
+            history.push("/signup") 
+        }
+        //console.log(uploadBook)
+        
+        
     }
 
 

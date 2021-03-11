@@ -55,7 +55,7 @@ export default function Signup(props) {
  
      useEffect(() => {
          if(autenticado){
-             props.history.push('/mi-perfil')
+             props.history.push('/calculadora')
          }
  
          if(mensaje){

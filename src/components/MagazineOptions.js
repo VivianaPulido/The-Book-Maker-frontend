@@ -8,7 +8,7 @@ export default function MagazineOptions() {
 
 
     const [book, setBook] = useState({
-        typeOfProd: "Comic",
+        typeOfProd: "Magazine",
         size:"",
         words:"",
         pages:"",
@@ -97,10 +97,12 @@ export default function MagazineOptions() {
 
     const sendNewBook= async(e) => {
         e.preventDefault()
+        await urlCloudinary()
         const token= localStorage.getItem("token")
         const uploadBook= await service.post("http://localhost:3001/crear-libro", book, {headers:{'x-auth-token': token}})
         //como los mando desde aqui a su perfil?? era con history no se que
         console.log(uploadBook)
+        console.log(book)
     }
  
 
@@ -108,7 +110,7 @@ export default function MagazineOptions() {
         <>
 
 <div className="mx-10">
-                <h2 className="text-white text-xl my-5 bg-blue-500 p-2">Paso 2: Selecciona Opciones de Impresión para tu Comic</h2>
+                <h2 className="text-white text-xl my-5 bg-blue-500 p-2">Paso 2: Selecciona Opciones de Impresión para tu Revista</h2>
 
                 <form onSubmit= {(event) => sendNewBook(event)}>
 
@@ -123,7 +125,7 @@ export default function MagazineOptions() {
                     </div>
 
                     <div className="contenerdorOpcionesB">
-                        <lablel className="block mb-2 text-base text-gray-600 dark:text-gray-400 ">Número de páginas en tu escrito:</lablel>
+                        <lablel className="block mb-2 text-base text-gray-600 dark:text-gray-400 ">Número de páginas:</lablel>
                         <input onChange={(event)=> handleChange(event)} type="number" name="pages" className="w-full px-3 py-2 mb-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"></input>
                     </div>
 
@@ -195,7 +197,7 @@ export default function MagazineOptions() {
                     <h2 className="text-white text-xl my-5 bg-blue-500 p-2">Paso 3: ¿Te convence? ¡Sube tus archivos y haz tu pedido ahora!</h2>
 
                     <div className="contenerdorOpcionesB">
-                        <label className="block mb-2 text-base text-gray-600 dark:text-gray-400">Título de tu Comic (con volumen si aplica):</label>
+                        <label className="block mb-2 text-base text-gray-600 dark:text-gray-400">Título de tu Revista (con num. de publicación si aplica):</label>
                         <input onChange={(event)=> handleChange(event)} type="text" name="title" className="w-full px-3 py-2 mb-4 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"/>
 
                         <label className="block text-base text-gray-600 dark:text-gray-400">Sube el archivo de tu portada:</label>
@@ -205,7 +207,7 @@ export default function MagazineOptions() {
                         <input onChange={(event)=> handleFile(event)} type="file" name="filePath" className="custom-file-input mb-4 mt-2"/><br/>
                     </div>
                     {/* <button type="submit" onClick={ (e)=> urlCloudinary(e)}>Crear Libro</button> */}
-                    <button type="submit" className=" mt-3 mb-5 px-3 py-3 text-white bg-green-400 rounded-md focus:bg-green-500 focus:outline-none">Crear Comic</button>
+                    <button type="submit" className=" mt-3 mb-5 px-3 py-3 text-white bg-green-400 rounded-md focus:bg-green-500 focus:outline-none">Crear Revista</button>
                     
                 </form>
                 

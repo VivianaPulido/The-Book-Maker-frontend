@@ -43,7 +43,7 @@ export default function Edición() {
             words: respuesta.data.libro.words,
             pages: respuesta.data.libro.pages,
             color: respuesta.data.libro.color,
-            paper: respuesta.data.libro.pages,
+            paper: respuesta.data.libro.paper,
             binding: respuesta.data.libro.binding,
             cover: respuesta.data.libro.cover,
             soporte: respuesta.data.libro.soporte,
@@ -118,8 +118,8 @@ export default function Edición() {
         book.soporte === "rigido" ? soportePrice= 25 : soportePrice= 20 
         book.binding === "hotmelt" ? bindingPrice= 50 : book.binding === "engrapado" ? bindingPrice= 15 : book.binding === "engargoladoMetal" ? bindingPrice= 25 : bindingPrice= 25
 
-        const pages= book.words/ wordsPerPage
-        const price= book.words / wordsPerPage * pricePerPage + coverPrice + soportePrice + bindingPrice
+        const pages= Math.round(book.words/ wordsPerPage)
+        const price= (book.words / wordsPerPage * pricePerPage + coverPrice + soportePrice + bindingPrice).toFixed(2)
 
         setBook({
             ...book,
@@ -155,8 +155,8 @@ export default function Edición() {
                     <div className="items-center">
                         <label className="block m-2 text-base text-gray-600 dark:text-gray-400">Formato: </label>
                         <select name="size" onChange={(event)=> handleChange(event)} className="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500">
-                            <option value="Pocket">Selecciona un formato</option>
-                            <option value="Pocket">Pocket: 10.5x17 cm</option>
+                            <option value="none" disabled hidden>Selecciona un formato</option>
+                            <option value="Pocket" selected={book.size === "Pocket" ? "selected": null}>Pocket: 10.5x17 cm</option>
                             <option value="Travel">Travel: 14x21 cm</option>
                             <option value="Standard">Standard: 17x21 cm</option>
                             <option value="Workbook">Work-book: 19x23 cm</option>
@@ -170,15 +170,15 @@ export default function Edición() {
                     <p className="block m-2 text-base text-gray-600 dark:text-gray-400">Color en  Interiores:</p>
                     <div className="flex">
                         <div className="flex items-center mx-2">
-                            <input onChange={(event)=> handleChange(event)} type="radio" name="color" value="Blanco y Negro"/>
+                            <input onChange={(event)=> handleChange(event)} checked={book.color==="Blanco y Negro" ? "checked": null} type="radio" name="color" value="Blanco y Negro"/>
                             <label className="block m-2 text-base dark:text-gray-400">Blanco y Negro</label>
                         </div>
                         <div className="flex items-center mx-2">
-                            <input onChange={(event)=> handleChange(event)} type="radio" name="color" value="Fullcolor"/>
+                            <input onChange={(event)=> handleChange(event)} type="radio" name="color" value="Fullcolor " checked={book.color==="Fullcolor" ? "checked": null}/>
                             <label className="block m-2 text-base dark:text-gray-400">Full Color</label>
                         </div>
                         <div className="flex items-center mx-2">
-                            <input onChange={(event)=> handleChange(event)}type="radio" name="color" value="Mixto"/>
+                            <input onChange={(event)=> handleChange(event)}type="radio" name="color" value="Mixto" checked={book.color==="Mixto" ? "checked": null}/>
                             <label className="block m-2 text-base dark:text-gray-400" >Mixto</label>
                         </div>
                     </div>
@@ -186,11 +186,11 @@ export default function Edición() {
                     <p className="block m-2 text-base text-gray-600 dark:text-gray-400">Papel:</p>
                     <div className="flex">
                         <div className="flex items-center mx-2">
-                            <input onChange={(event)=> handleChange(event)} type="radio" name="paper" value="Bond blanco 90 gr."/>
+                            <input onChange={(event)=> handleChange(event)} type="radio" name="paper" value="Bond blanco 90 gr." checked={book.paper==="Bond blanco 90 gr." ? "checked": null}/>
                             <label className="block m-2 text-base dark:text-gray-400">Bond Blanco 90g</label>
                         </div>  
                         <div className="flex items-center mx-2"> 
-                            <input onChange={(event)=> handleChange(event)} type="radio" name="paper" value="Bond color marfil 90 gr."/>
+                            <input onChange={(event)=> handleChange(event)} type="radio" name="paper" value="Bond color marfil 90 gr." checked={book.paper==="Bond color marfil 90 gr." ? "checked": null}/>
                             <label className="block m-2 text-base dark:text-gray-400">Bond Marfil 90gr</label>
                         </div> 
                     </div>
@@ -198,19 +198,19 @@ export default function Edición() {
                     <p className="block m-2 text-base text-gray-600 dark:text-gray-400">Encuadernado</p>
                     <div className="flex">
                         <div className="flex items-center mx-2">
-                            <input onChange={(event)=> handleChange(event)} type="radio" name="binding" value="Hotmelt"/>
+                            <input onChange={(event)=> handleChange(event)} type="radio" name="binding" value="Hotmelt" checked={book.binding==="Hotmelt" ? "checked": null}/>
                             <label className="block m-2 text-base dark:text-gray-400">Hotmelt (americano)</label>
                         </div>
                         <div className="flex items-center mx-2">
-                            <input onChange={(event)=> handleChange(event)} type="radio" name="binding" value="Engrapado a lomo"/>
+                            <input onChange={(event)=> handleChange(event)} type="radio" name="binding" value="Engrapado a lomo" checked={book.binding==="Engrapado a lomo" ? "checked": null}/>
                             <label className="block m-2 text-base dark:text-gray-400">Engrapado a lomo</label>
                         </div>
                         <div className="flex items-center mx-2">
-                            <input onChange={(event)=> handleChange(event)} type="radio" name="binding" value="Engargolado metálico"/>
+                            <input onChange={(event)=> handleChange(event)} type="radio" name="binding" value="Engargolado metálico" checked={book.binding==="Engargolado metálico" ? "checked": null}/>
                             <label className="block m-2 text-base dark:text-gray-400">Engargolado Metálico</label>
                         </div>
                         <div className="flex items-center mx-2">
-                            <input onChange={(event)=> handleChange(event)} type="radio" name="binding" value="Engargolado plástico"/>
+                            <input onChange={(event)=> handleChange(event)} type="radio" name="binding" value="Engargolado plástico" checked={book.binding==="Engargolado plástico" ? "checked": null}/>
                             <label className="block m-2 text-base dark:text-gray-400">Engargolado Plástico</label>
                         </div>
                     </div>
@@ -218,30 +218,30 @@ export default function Edición() {
                     <p className="block m-2 text-base text-gray-600 dark:text-gray-400">Acabado de Portada</p>
                     <div className="flex">
                         <div className="flex items-center mx-2">
-                            <input onChange={(event)=> handleChange(event)} type="radio" name="cover" value="Brillante"/>
+                            <input onChange={(event)=> handleChange(event)} type="radio" name="cover" value="Brillante" checked={book.cover==="Brillante" ? "checked": null}/>
                             <label className="block m-2 text-base dark:text-gray-400">Brillante</label>
                         </div>
                         <div className="flex items-center mx-2">
-                            <input onChange={(event)=> handleChange(event)} type="radio" name="cover" value="Mate"/>
+                            <input onChange={(event)=> handleChange(event)} type="radio" name="cover" value="Mate" checked={book.cover==="Mate" ? "checked": null}/>
                             <label className="block m-2 text-base dark:text-gray-400">Mate</label>
                         </div>
                         <div className="flex items-center mx-2">
-                            <input onChange={(event)=> handleChange(event)} type="radio" name="soporte" value="Rigido"/>
+                            <input onChange={(event)=> handleChange(event)} type="radio" name="soporte" value="Rigido" checked={book.soporte==="Rigido" ? "checked": null}/>
                             <label className="block m-2 text-base dark:text-gray-400">Portada rígida</label>
                         </div>
                         <div className="flex items-center mx-2">
-                            <input onChange={(event)=> handleChange(event)} type="radio" name="soporte" value="Semirigido"/>
+                            <input onChange={(event)=> handleChange(event)} type="radio" name="soporte" value="Semirigido" checked={book.soporte==="Semirigido" ? "checked": null}/>
                             <label className="block m-2 text-base dark:text-gray-400">Portada semi-rígida</label>
                         </div>
                     </div>
 
                     <div className="flex items-center">   
                     <button onClick={(e)=>calculatePrice(book, e)} className=" mt-3 px-3 py-3 text-white bg-blue-600 rounded-md focus:bg-indigo-600 focus:outline-none">Calcular Precio</button>
-                    <h3 className="mx-5 text-2xl">Precio por Ejemplar: ${book.price}.00</h3>
+                    <h3 className="mx-5 text-2xl">Precio por Ejemplar: ${book.price}</h3>
                     </div> 
                     
-                    <p className="m-4">¿Te convence?</p>
-                    <h2 className="text-white text-xl my-5 bg-blue-600 p-2">Paso 3: ¡Sube tus archivos y haz tu pedido ahora!</h2>
+                    <p className="m-4">¿Necesitas cambiar tus archivos?</p>
+                    <h2 className="text-white text-xl my-5 bg-blue-600 p-2">Paso 3: ¡Sube tus nuevos archivos y haz tu pedido ahora!</h2>
 
                     <label className="block m-2 text-base text-gray-600 dark:text-gray-400">Título de tu Libro:</label>
                     <input onChange={(event)=> handleChange(event)} type="text" name="title" value={book.title} className="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"/>
@@ -252,16 +252,10 @@ export default function Edición() {
                     <label>Sube el archivo del texto original:</label>
                     <input onChange={(event)=> handleFile(event)} type="file" name="filePath"/>
 
-                    <label>Sinopsis:</label>
-                    <textarea onChange={(event)=> handleChange(event)} type="text" name="synopsis"></textarea>
-
-                    {/* <button type="submit" onClick={ (e)=> urlCloudinary(e)}>Crear Libro</button> */}
-                    <button type="submit">Editar Libro</button>
+                    <button type="submit">Editar</button>
                     
                 </form>
                 
-                <p>Si crees que tu proyecto se sale de los estándares, contáctanos! Nuestro equipo multidisciplinario cuenta con profesionales que te pueden ayudar con corrección de estilo, retoque fotográfico, ilustración, diseño editorial, registro de propiedad intelectual y más. ¡Déjanos ayudarte a traer a la vida tu creación!</p>
-                <button>Agenda una cita</button>
             </div>
             
         </>
