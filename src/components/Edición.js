@@ -143,11 +143,7 @@ export default function Edición() {
             if(usuario){
             const token= localStorage.getItem("token")
             const res = await service.put(`https://the-book-maker.herokuapp.com/mis-obras/${bookId}`, book, {headers:{'x-auth-token': token}})
-            const foundBook = await res.data.libros
-        
-            setBook({
-                
-            })
+    
 
             history.push("/mis-obras") 
         }else{
