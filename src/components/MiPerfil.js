@@ -25,7 +25,7 @@ export default function MiPerfil() {
 
    
     async function deleteBook(id) {
-       console.log(id)
+       promt('¿Seguro que quieres elimianr este proyecto?', 'default answer')
         const token= localStorage.getItem("token")
         const deleted= await service.delete(`/eliminar/${id}`, {headers:{'x-auth-token': token}})
         setlibros([])

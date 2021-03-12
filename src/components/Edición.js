@@ -138,7 +138,8 @@ export default function Edición() {
     const history = useHistory()
 
 //funcion para hacer la edicion del libro    
-        const editBook = async (bookId) => {
+        const editBook = async (bookId, e) => {
+            e.preventDefault()
             if(usuario){
             const token= localStorage.getItem("token")
             const res = await service.put(`https://the-book-maker.herokuapp.com/mis-obras/${bookId}`, book, {headers:{'x-auth-token': token}})
@@ -164,7 +165,7 @@ export default function Edición() {
 <div className="mx-10">
                 <h2 className="text-white text-xl my-5 bg-blue-600 p-2">Edita tu Libro</h2>
 
-                <form onSubmit= {()=>(editBook(id))}>
+                <form onSubmit= {(e)=>(editBook(id, e))}>
                 
 
                     <div className="items-center contenerdorOpcionesA">
