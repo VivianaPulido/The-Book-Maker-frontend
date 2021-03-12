@@ -50,8 +50,8 @@ export default function MiPerfil() {
                     <p className="text-base text-gray-600 mx-3.5">Papel: {e.paper}</p>
                     <p className="text-base text-gray-600 mx-3.5">Encuadernado: {e.binding}</p>
                     <p className="text-base text-gray-600 mx-3.5">Acabado de Portada: {e.cover}</p>
-                    <p className="text-base text-gray-600 mx-3.5">Archivo para portada: {e.coverImgPath}</p>
-                    <p className="text-base text-gray-600 mx-3.5">Archivo de texto: {e.filePath}</p>
+                    {/* <p className="text-base text-gray-600 mx-3.5">Archivo para portada: {e.coverImgPath}</p>
+                    <p className="text-base text-gray-600 mx-3.5">Archivo de texto: {e.filePath}</p> */}
                     <p className="text-base text-gray-600 mx-3.5">Id: {e._id}</p>
 
                     <h2 className="text-base text-gray-600 font-bold mx-3.5">Precio por ejemplar: ${e.price}</h2>
@@ -69,7 +69,7 @@ export default function MiPerfil() {
           }
  
         </div>
-               
+
         </>
     )
 }
