@@ -1,6 +1,5 @@
 import React, {useState, useContext, useEffect} from 'react'
 import axios from 'axios'
-import { data } from 'autoprefixer';
 import {
     BrowserRouter as Router,
     Link
@@ -12,7 +11,7 @@ export default function MiPerfil() {
     const [libros, setlibros] = useState([])
 
     const service = axios.create({
-        baseURL: "http://localhost:3001",
+        baseURL: "https://the-book-maker.herokuapp.com",
         withCredentials: true,
       });
 
@@ -32,16 +31,7 @@ export default function MiPerfil() {
         setlibros([])
     }
   
-
-    // const [price, setPrice] = useState(
-    //     libros.data.price
-    // )
-
-    function calcPrecioFinal(e, event){
-        
-    }
-
-   
+    
 
     return(
         <> 

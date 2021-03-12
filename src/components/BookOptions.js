@@ -68,11 +68,11 @@ export default function BookOptions() {
        console.log("esto si me da el url", respuesta.data.url)
        setBook({
             ...book,
-            //coverImgPath: respuesta.data.url,
-            coverImgPath: "Esto no se refleja",
+            coverImgPath: respuesta.data.url,
+            //coverImgPath: "Esto no se refleja",
             filePath: respuesta1.data.url
         })
-        console.log("no esta seteando", book)
+        //console.log("no esta seteando", book)
     }
 
    
@@ -103,7 +103,7 @@ export default function BookOptions() {
     const history = useHistory()
 
     const service = axios.create({
-        baseURL: "http://localhost:3001",
+        baseURL: "https://the-book-maker.herokuapp.com",
         withCredentials: true,
       });
 
@@ -112,7 +112,7 @@ export default function BookOptions() {
         if(usuario){
         await urlCloudinary()
         const token= localStorage.getItem("token")
-        const uploadBook= await service.post("http://localhost:3001/crear-libro", book, {headers:{'x-auth-token': token}})
+        const uploadBook= await service.post("https://the-book-maker.herokuapp.com/crear-libro", book, {headers:{'x-auth-token': token}})
         
        history.push("/mis-obras") 
         }else{

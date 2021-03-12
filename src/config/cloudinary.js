@@ -10,7 +10,7 @@ cloudinary.config({
  
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
-  folder: 'memory-chest', // Este va a ser el nombre del folder en cloudinary
+  folder: 'book-maker', // Este va a ser el nombre del folder en cloudinary
   allowedFormats: ['jpg', 'png'],
   params: { resource_type: 'raw' },
   filename: function (req, file, cb) {

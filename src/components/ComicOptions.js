@@ -91,7 +91,7 @@ export default function ComicOptions() {
     }
 
     const service = axios.create({
-        baseURL: "http://localhost:3001",
+        baseURL: "https://the-book-maker.herokuapp.com/",
         withCredentials: true,
       });
 
@@ -99,7 +99,7 @@ export default function ComicOptions() {
         e.preventDefault()
         await urlCloudinary()
         const token= localStorage.getItem("token")
-        const uploadBook= await service.post("http://localhost:3001/crear-libro", book, {headers:{'x-auth-token': token}})
+        const uploadBook= await service.post("https://the-book-maker.herokuapp.com/crear-libro", book, {headers:{'x-auth-token': token}})
         //como los mando desde aqui a su perfil?? era con history no se que
         console.log(uploadBook)
     }
@@ -210,8 +210,7 @@ export default function ComicOptions() {
                     
                 </form>
                 
-                {/* <p className="block mb-2 mt-4 text-base text-gray-600 dark:text-gray-400">Si crees que tu proyecto se sale de los estándares, contáctanos! Nuestro equipo multidisciplinario cuenta con profesionales que te pueden ayudar con corrección de estilo, retoque fotográfico, ilustración, diseño editorial, registro de propiedad intelectual y más. ¡Déjanos ayudarte a traer a la vida tu creación!</p>
-                <button>Agenda una cita</button> */}
+               
             </div>
            
         </>

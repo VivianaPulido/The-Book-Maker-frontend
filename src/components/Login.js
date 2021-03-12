@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react'
 //import axios from 'axios'
-import { Link } from 'react-router-dom'
+
 
 import AlertaContext from '../context/alertas/AlertaContext'
 import AuthContext from '../context/autenticacion/AuthContext'
@@ -90,7 +90,7 @@ export default function Login(props) {
                                 </div>
 
                                 <div className="mb-6">
-                                <button type="submit" className="w-full px-3 py-4 text-white bg-blue-600 rounded-md focus:bg-indigo-600 focus:outline-none">Iniciar Sesión</button>
+                                <button type="submit" className="w-full px-3 py-4 text-white bg-blue-600 rounded-md focus:bg-blue-500 focus:outline-none">Iniciar Sesión</button>
                                 </div>
                             </form>
                         </div>    

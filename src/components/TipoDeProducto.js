@@ -6,14 +6,10 @@ import ComicOptions from './ComicOptions'
 import bookImg from '../images/Captura de Pantalla 2021-03-07 a la(s) 14.39.26.png'
 import magImg from '../images/Captura de Pantalla 2021-03-07 a la(s) 14.40.24.png'
 import comicImg from '../images/Captura de Pantalla 2021-03-07 a la(s) 14.39.49.png'
-import AuthContext from '../context/autenticacion/AuthContext'
 
-//import uploadCloud from '../config/cloudinary'
 
 export default function TipoDeProducto() {
 
-    const authContext= useContext(AuthContext)
-    const {usuario, usuarioAutenticado} = authContext
 
     const [typeOfProd, setTypeOfProd] = useState("book")
     

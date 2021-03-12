@@ -91,7 +91,7 @@ export default function MagazineOptions() {
     }
 
     const service = axios.create({
-        baseURL: "http://localhost:3001",
+        baseURL: "https://the-book-maker.herokuapp.com/",
         withCredentials: true,
       });
 
@@ -99,7 +99,7 @@ export default function MagazineOptions() {
         e.preventDefault()
         await urlCloudinary()
         const token= localStorage.getItem("token")
-        const uploadBook= await service.post("http://localhost:3001/crear-libro", book, {headers:{'x-auth-token': token}})
+        const uploadBook= await service.post("https://the-book-maker.herokuapp.com/crear-libro", book, {headers:{'x-auth-token': token}})
         //como los mando desde aqui a su perfil?? era con history no se que
         console.log(uploadBook)
         console.log(book)

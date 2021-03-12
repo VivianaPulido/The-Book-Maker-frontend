@@ -63,7 +63,7 @@ const AuthState = props => {
         }
 
         try {
-            const respuesta = await clienteAxios.get('/login')//NO ENTIENDO BIEN QUE HACE ESTO, QUE RUTA LE PONGO
+            const respuesta = await clienteAxios.get('/login')
 
             dispatch({
                 type: OBTENER_USUARIO,

@@ -25,7 +25,7 @@ export default function Edición() {
     //traer los datos del libro especifico que quiero editar
 
     const service = axios.create({
-        baseURL: "http://localhost:3001",
+        baseURL: "https://the-book-maker.herokuapp.com",
         withCredentials: true,
       });
 
@@ -133,7 +133,7 @@ export default function Edición() {
 //funcion para hacer la edicion del libro    
         const editBook = async (bookId) => {
             const token= localStorage.getItem("token")
-            const res = await service.put(`http://localhost:3001/mis-obras/${bookId}`, book, {headers:{'x-auth-token': token}})
+            const res = await service.put(`https://the-book-maker.herokuapp.com/mis-obras/${bookId}`, book, {headers:{'x-auth-token': token}})
             const foundBook = await res.data.libros
         
             setBook({

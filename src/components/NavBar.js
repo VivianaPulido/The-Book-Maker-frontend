@@ -10,8 +10,7 @@ export default function NavBar() {
     //Extraer info de autenticación
     const authContext= useContext(AuthContext)
     const {usuario, usuarioAutenticado, cerrarSesion} = authContext
-    //esta desestructuración de abajo viene de los como props del AuthState (se pueden ver en el return del AuthStae )... (creo) 
-    //console.log(usuario)//me esta dando undefined :(
+    //esta desestructuración de abajo viene de los como props del AuthState (se pueden ver en el return del AuthStae )
 
     //la función dentro de useEffect (definida en el AuthState, importada con context) me regresa el usuario autenticado, el token 
     useEffect(() => {

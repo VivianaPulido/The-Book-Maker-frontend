@@ -21,8 +21,6 @@ import Edicion from './components/Edición'
 import AuthState from './context/autenticacion/AuthState'
 import AlertaState from './context/alertas/AlertaState'
 
-import tokenAuth from './config/token'
-
 
 
 function App() {
