@@ -100,6 +100,7 @@ export default function BookOptions() {
 
         return false
     }
+
     const history = useHistory()
 
     const service = axios.create({
@@ -118,9 +119,7 @@ export default function BookOptions() {
         }else{
             history.push("/signup") 
         }
-        //console.log(uploadBook)
-        
-        
+        //console.log(uploadBook)  
     }
 
 

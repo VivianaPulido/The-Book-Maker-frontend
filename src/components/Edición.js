@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
+import { useHistory } from "react-router-dom";
+import AuthContext from '../context/autenticacion/AuthContext'
 
 export default function Edición() {
 
+    const authContext= useContext(AuthContext)
+    const {usuario} = authContext
+
      //Estado del libro que intento editar
-     const [book, setBook] = useState({ //
+     const [book, setBook] = useState({ 
         typeOfProd: "Book",
         size: "",
         words: "",
@@ -130,8 +135,11 @@ export default function Edición() {
         return false
     }
 
+    const history = useHistory()
+
 //funcion para hacer la edicion del libro    
         const editBook = async (bookId) => {
+            if(usuario){
             const token= localStorage.getItem("token")
             const res = await service.put(`https://the-book-maker.herokuapp.com/mis-obras/${bookId}`, book, {headers:{'x-auth-token': token}})
             const foundBook = await res.data.libros
@@ -139,7 +147,14 @@ export default function Edición() {
             setBook({
                 
             })
+
+            history.push("/mis-obras") 
+        }else{
+            history.push("/signup") 
         }
+    }
+
+}
        
     
 

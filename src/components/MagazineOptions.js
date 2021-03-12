@@ -1,7 +1,11 @@
 import React, { useState} from 'react'
 import axios from 'axios'
+import { useHistory } from "react-router-dom";
 
 export default function MagazineOptions() {
+
+    const authContext= useContext(AuthContext)
+    const {usuario} = authContext
 
     const [coverImg, setCoverImg] = useState()
     const [file, setFile] = useState()
@@ -95,14 +99,19 @@ export default function MagazineOptions() {
         withCredentials: true,
       });
 
+    const history = useHistory()  
+
     const sendNewBook= async(e) => {
         e.preventDefault()
-        await urlCloudinary()
-        const token= localStorage.getItem("token")
-        const uploadBook= await service.post("https://the-book-maker.herokuapp.com/crear-libro", book, {headers:{'x-auth-token': token}})
-        //como los mando desde aqui a su perfil?? era con history no se que
-        console.log(uploadBook)
-        console.log(book)
+        if(usuario){
+            await urlCloudinary()
+            const token= localStorage.getItem("token")
+            const uploadBook= await service.post("https://the-book-maker.herokuapp.com/crear-libro", book, {headers:{'x-auth-token': token}})
+        
+            history.push("/mis-obras") 
+        }else{
+            history.push("/signup") 
+        }
     }
  
 
