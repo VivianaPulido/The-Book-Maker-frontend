@@ -264,7 +264,7 @@ export default function Edición() {
                         <input onChange={(event)=> handleFile(event)} type="file" name="filePath" className="custom-file-input mb-4 mt-2"/>
                     </div>
 
-                    <button type="submit" className=" mt-3 px-3 py-3 mb-10 w-28 text-white bg-blue-600 rounded-md focus:bg-indigo-600 focus:outline-none">Editar</button>
+                    <button type="submit" className=" mt-3 px-3 py-3 mb-10 w-28 text-white bg-blue-500 rounded-md focus:bg-blue-600 focus:outline-none">Editar</button>
                     
                 </form>
                 

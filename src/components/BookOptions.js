@@ -52,7 +52,7 @@ export default function BookOptions() {
     }
 
     async function urlCloudinary (e){
-       // e.preventDefault(e)
+       // e.preventDefault()
         const data= new FormData()
         data.append("file", coverImg)
         data.append("upload_preset", "book-maker")

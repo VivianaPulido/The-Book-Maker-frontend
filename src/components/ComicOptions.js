@@ -47,7 +47,7 @@ export default function ComicOptions() {
     }
 
     async function urlCloudinary (e){
-        e.preventDefault()
+        //e.preventDefault()
         const data= new FormData()
         data.append("file", coverImg)
         data.append("upload_preset", "book-maker")
