@@ -152,7 +152,7 @@ export default function Edición() {
                 <form onSubmit= {()=>(editBook(id))}>
                 
 
-                    <div className="items-center">
+                    <div className="items-center contenerdorOpcionesA">
                         <label className="block m-2 text-base text-gray-600 dark:text-gray-400">Formato: </label>
                         <select name="size" onChange={(event)=> handleChange(event)} className="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500">
                             <option value="none" disabled hidden>Selecciona un formato</option>
@@ -164,74 +164,84 @@ export default function Edición() {
                         </select>
                     </div>
 
-                    <lablel className="block m-2 text-base text-gray-600 dark:text-gray-400">Número de palabras en tu escrito:</lablel>
-                    <input onChange={(event)=> handleChange(event)} type="number" min="0" value={book.words} name="words" className="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"></input>
+                    <div className="contenerdorOpcionesB">
+                        <lablel className="block m-2 text-base text-gray-600 dark:text-gray-400">Número de palabras en tu escrito:</lablel>
+                        <input onChange={(event)=> handleChange(event)} type="number" min="0" value={book.words} name="words" className="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"></input>
+                    </div>
 
-                    <p className="block m-2 text-base text-gray-600 dark:text-gray-400">Color en  Interiores:</p>
-                    <div className="flex">
-                        <div className="flex items-center mx-2">
-                            <input onChange={(event)=> handleChange(event)} checked={book.color==="Blanco y Negro" ? "checked": null} type="radio" name="color" value="Blanco y Negro"/>
-                            <label className="block m-2 text-base dark:text-gray-400">Blanco y Negro</label>
-                        </div>
-                        <div className="flex items-center mx-2">
-                            <input onChange={(event)=> handleChange(event)} type="radio" name="color" value="Fullcolor " checked={book.color==="Fullcolor" ? "checked": null}/>
-                            <label className="block m-2 text-base dark:text-gray-400">Full Color</label>
-                        </div>
-                        <div className="flex items-center mx-2">
-                            <input onChange={(event)=> handleChange(event)}type="radio" name="color" value="Mixto" checked={book.color==="Mixto" ? "checked": null}/>
-                            <label className="block m-2 text-base dark:text-gray-400" >Mixto</label>
+                    <div className="contenerdorOpcionesA">
+                        <p className="block m-2 text-base text-gray-600 dark:text-gray-400">Color en  Interiores:</p>
+                        <div className="flex">
+                            <div className="flex items-center mx-2">
+                                <input onChange={(event)=> handleChange(event)} checked={book.color==="Blanco y Negro" ? "checked": null} type="radio" name="color" value="Blanco y Negro"/>
+                                <label className="block m-2 text-base dark:text-gray-400">Blanco y Negro</label>
+                            </div>
+                            <div className="flex items-center mx-2">
+                                <input onChange={(event)=> handleChange(event)} type="radio" name="color" value="Fullcolor " checked={book.color==="Fullcolor" ? "checked": null}/>
+                                <label className="block m-2 text-base dark:text-gray-400">Full Color</label>
+                            </div>
+                            <div className="flex items-center mx-2">
+                                <input onChange={(event)=> handleChange(event)}type="radio" name="color" value="Mixto" checked={book.color==="Mixto" ? "checked": null}/>
+                                <label className="block m-2 text-base dark:text-gray-400" >Mixto</label>
+                            </div>
                         </div>
                     </div>
 
-                    <p className="block m-2 text-base text-gray-600 dark:text-gray-400">Papel:</p>
-                    <div className="flex">
-                        <div className="flex items-center mx-2">
-                            <input onChange={(event)=> handleChange(event)} type="radio" name="paper" value="Bond blanco 90 gr." checked={book.paper==="Bond blanco 90 gr." ? "checked": null}/>
-                            <label className="block m-2 text-base dark:text-gray-400">Bond Blanco 90g</label>
-                        </div>  
-                        <div className="flex items-center mx-2"> 
-                            <input onChange={(event)=> handleChange(event)} type="radio" name="paper" value="Bond color marfil 90 gr." checked={book.paper==="Bond color marfil 90 gr." ? "checked": null}/>
-                            <label className="block m-2 text-base dark:text-gray-400">Bond Marfil 90gr</label>
-                        </div> 
-                    </div>
-
-                    <p className="block m-2 text-base text-gray-600 dark:text-gray-400">Encuadernado</p>
-                    <div className="flex">
-                        <div className="flex items-center mx-2">
-                            <input onChange={(event)=> handleChange(event)} type="radio" name="binding" value="Hotmelt" checked={book.binding==="Hotmelt" ? "checked": null}/>
-                            <label className="block m-2 text-base dark:text-gray-400">Hotmelt (americano)</label>
-                        </div>
-                        <div className="flex items-center mx-2">
-                            <input onChange={(event)=> handleChange(event)} type="radio" name="binding" value="Engrapado a lomo" checked={book.binding==="Engrapado a lomo" ? "checked": null}/>
-                            <label className="block m-2 text-base dark:text-gray-400">Engrapado a lomo</label>
-                        </div>
-                        <div className="flex items-center mx-2">
-                            <input onChange={(event)=> handleChange(event)} type="radio" name="binding" value="Engargolado metálico" checked={book.binding==="Engargolado metálico" ? "checked": null}/>
-                            <label className="block m-2 text-base dark:text-gray-400">Engargolado Metálico</label>
-                        </div>
-                        <div className="flex items-center mx-2">
-                            <input onChange={(event)=> handleChange(event)} type="radio" name="binding" value="Engargolado plástico" checked={book.binding==="Engargolado plástico" ? "checked": null}/>
-                            <label className="block m-2 text-base dark:text-gray-400">Engargolado Plástico</label>
+                    <div className="contenerdorOpcionesB">
+                        <p className="block m-2 text-base text-gray-600 dark:text-gray-400">Papel:</p>
+                        <div className="flex">
+                            <div className="flex items-center mx-2">
+                                <input onChange={(event)=> handleChange(event)} type="radio" name="paper" value="Bond blanco 90 gr." checked={book.paper==="Bond blanco 90 gr." ? "checked": null}/>
+                                <label className="block m-2 text-base dark:text-gray-400">Bond Blanco 90g</label>
+                            </div>  
+                            <div className="flex items-center mx-2"> 
+                                <input onChange={(event)=> handleChange(event)} type="radio" name="paper" value="Bond color marfil 90 gr." checked={book.paper==="Bond color marfil 90 gr." ? "checked": null}/>
+                                <label className="block m-2 text-base dark:text-gray-400">Bond Marfil 90gr</label>
+                            </div> 
                         </div>
                     </div>
 
-                    <p className="block m-2 text-base text-gray-600 dark:text-gray-400">Acabado de Portada</p>
-                    <div className="flex">
-                        <div className="flex items-center mx-2">
-                            <input onChange={(event)=> handleChange(event)} type="radio" name="cover" value="Brillante" checked={book.cover==="Brillante" ? "checked": null}/>
-                            <label className="block m-2 text-base dark:text-gray-400">Brillante</label>
+                    <div className="contenerdorOpcionesA">
+                        <p className="block m-2 text-base text-gray-600 dark:text-gray-400">Encuadernado</p>
+                        <div className="flex">
+                            <div className="flex items-center mx-2">
+                                <input onChange={(event)=> handleChange(event)} type="radio" name="binding" value="Hotmelt" checked={book.binding==="Hotmelt" ? "checked": null}/>
+                                <label className="block m-2 text-base dark:text-gray-400">Hotmelt (americano)</label>
+                            </div>
+                            <div className="flex items-center mx-2">
+                                <input onChange={(event)=> handleChange(event)} type="radio" name="binding" value="Engrapado a lomo" checked={book.binding==="Engrapado a lomo" ? "checked": null}/>
+                                <label className="block m-2 text-base dark:text-gray-400">Engrapado a lomo</label>
+                            </div>
+                            <div className="flex items-center mx-2">
+                                <input onChange={(event)=> handleChange(event)} type="radio" name="binding" value="Engargolado metálico" checked={book.binding==="Engargolado metálico" ? "checked": null}/>
+                                <label className="block m-2 text-base dark:text-gray-400">Engargolado Metálico</label>
+                            </div>
+                            <div className="flex items-center mx-2">
+                                <input onChange={(event)=> handleChange(event)} type="radio" name="binding" value="Engargolado plástico" checked={book.binding==="Engargolado plástico" ? "checked": null}/>
+                                <label className="block m-2 text-base dark:text-gray-400">Engargolado Plástico</label>
+                            </div>
                         </div>
-                        <div className="flex items-center mx-2">
-                            <input onChange={(event)=> handleChange(event)} type="radio" name="cover" value="Mate" checked={book.cover==="Mate" ? "checked": null}/>
-                            <label className="block m-2 text-base dark:text-gray-400">Mate</label>
-                        </div>
-                        <div className="flex items-center mx-2">
-                            <input onChange={(event)=> handleChange(event)} type="radio" name="soporte" value="Rigido" checked={book.soporte==="Rigido" ? "checked": null}/>
-                            <label className="block m-2 text-base dark:text-gray-400">Portada rígida</label>
-                        </div>
-                        <div className="flex items-center mx-2">
-                            <input onChange={(event)=> handleChange(event)} type="radio" name="soporte" value="Semirigido" checked={book.soporte==="Semirigido" ? "checked": null}/>
-                            <label className="block m-2 text-base dark:text-gray-400">Portada semi-rígida</label>
+                    </div>
+
+                    <div className="contenerdorOpcionesB">
+                        <p className="block m-2 text-base text-gray-600 dark:text-gray-400">Acabado de Portada</p>
+                        <div className="flex">
+                            <div className="flex items-center mx-2">
+                                <input onChange={(event)=> handleChange(event)} type="radio" name="cover" value="Brillante" checked={book.cover==="Brillante" ? "checked": null}/>
+                                <label className="block m-2 text-base dark:text-gray-400">Brillante</label>
+                            </div>
+                            <div className="flex items-center mx-2">
+                                <input onChange={(event)=> handleChange(event)} type="radio" name="cover" value="Mate" checked={book.cover==="Mate" ? "checked": null}/>
+                                <label className="block m-2 text-base dark:text-gray-400">Mate</label>
+                            </div>
+                            <div className="flex items-center mx-2">
+                                <input onChange={(event)=> handleChange(event)} type="radio" name="soporte" value="Rigido" checked={book.soporte==="Rigido" ? "checked": null}/>
+                                <label className="block m-2 text-base dark:text-gray-400">Portada rígida</label>
+                            </div>
+                            <div className="flex items-center mx-2">
+                                <input onChange={(event)=> handleChange(event)} type="radio" name="soporte" value="Semirigido" checked={book.soporte==="Semirigido" ? "checked": null}/>
+                                <label className="block m-2 text-base dark:text-gray-400">Portada semi-rígida</label>
+                            </div>
                         </div>
                     </div>
 
@@ -241,18 +251,20 @@ export default function Edición() {
                     </div> 
                     
                     <p className="m-4">¿Necesitas cambiar tus archivos?</p>
-                    <h2 className="text-white text-xl my-5 bg-blue-600 p-2">Paso 3: ¡Sube tus nuevos archivos y haz tu pedido ahora!</h2>
+                        <h2 className="text-white text-xl my-5 bg-blue-600 p-2">Paso 3: ¡Sube tus nuevos archivos y haz tu pedido ahora!</h2>
 
-                    <label className="block m-2 text-base text-gray-600 dark:text-gray-400">Título de tu Libro:</label>
-                    <input onChange={(event)=> handleChange(event)} type="text" name="title" value={book.title} className="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"/>
+                    <div className="contenerdorOpcionesB">
+                        <label className="block m-2 text-base text-gray-600 dark:text-gray-400">Título de tu Libro:</label>
+                        <input onChange={(event)=> handleChange(event)} type="text" name="title" value={book.title} className="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"/>
 
-                    <label>Sube el archivo de tu portada:</label>
-                    <input  onChange={(event)=> handleCoverImg(event)} type="file" name="coverImgPath"/>
+                        <label className="block text-base text-gray-600 dark:text-gray-400">Sube el archivo de tu portada:</label>
+                        <input  onChange={(event)=> handleCoverImg(event)} type="file" name="coverImgPath" className="custom-file-input mb-4 mt-2"/>
 
-                    <label>Sube el archivo del texto original:</label>
-                    <input onChange={(event)=> handleFile(event)} type="file" name="filePath"/>
+                        <label className="block text-base text-gray-600 dark:text-gray-400">Sube el archivo del texto original:</label>
+                        <input onChange={(event)=> handleFile(event)} type="file" name="filePath" className="custom-file-input mb-4 mt-2"/>
+                    </div>
 
-                    <button type="submit">Editar</button>
+                    <button type="submit" className=" mt-3 px-3 py-3 mb-10 w-28 text-white bg-blue-600 rounded-md focus:bg-indigo-600 focus:outline-none">Editar</button>
                     
                 </form>
                 

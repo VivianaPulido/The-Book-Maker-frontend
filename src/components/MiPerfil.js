@@ -53,26 +53,24 @@ export default function MiPerfil() {
                 libros.map((e, id) => {
               return (
                 <div key={id} className="contenerdorTipoProd m-10">
-                    <h2 className="text-lg">Título: {e.title}</h2>
-                    <p>Formato: {e.size}</p>
-                    <p>Palabras: {e.words}</p>
-                    <p>Páginas: {e.pages}</p>
-                    <p>Color en Interiores: {e.color}</p>
-                    <p>Papel: {e.paper}</p>
-                    <p>Encuadernado: {e.binding}</p>
-                    <p>Acabado de Portada: {e.cover}</p>
-                    <p>Archivo para portada: {e.coverImgPath}</p>
-                    <p>Archivo de texto: {e.filePath}</p>
+                    <h2 className="text-lg font-bold text-gray-600 mx-3.5">Título: {e.title}</h2>
+                    <p className="text-base text-gray-600 mx-3.5">Formato: {e.size}</p>
+                    <p className="text-base text-gray-600 mx-3.5">Palabras: {e.words}</p>
+                    <p className="text-base text-gray-600 mx-3.5">Páginas: {e.pages}</p>
+                    <p className="text-base text-gray-600 mx-3.5">Color en Interiores: {e.color}</p>
+                    <p className="text-base text-gray-600 mx-3.5">Papel: {e.paper}</p>
+                    <p className="text-base text-gray-600 mx-3.5">Encuadernado: {e.binding}</p>
+                    <p className="text-base text-gray-600 mx-3.5">Acabado de Portada: {e.cover}</p>
+                    <p className="text-base text-gray-600 mx-3.5">Archivo para portada: {e.coverImgPath}</p>
+                    <p className="text-base text-gray-600 mx-3.5">Archivo de texto: {e.filePath}</p>
+                    <p className="text-base text-gray-600 mx-3.5">Id: {e._id}</p>
 
-                    <h2>Precio por ejemplar: {e.price}</h2>
-                    <p>Id: {e._id}</p>
-                    <Link to={`/editar/${e._id}`}>Editar</Link>
-                    <button onClick={(evento) => deleteBook(e._id, evento)}>Eliminar</button> 
-                    <form>
-                
-                        <label>Ejemplares</label>
-                        {/* <input onChange={(event) => calcPrecioFinal(e, event)} type="number" value="ejemplares"/> */}
-                    </form>
+                    <h2 className="text-base text-gray-600 font-bold mx-3.5">Precio por ejemplar: ${e.price}</h2>
+                    
+                    <div className="btns-mi-perfil mx-3.5">
+                      <Link to={`/editar/${e._id}`} className="w-28 text-center mt-3 mb-2 px-4 py-4 text-white bg-blue-500 rounded-md focus:bg-blue-600 focus:outline-none">Editar</Link>
+                      <button onClick={(evento) => deleteBook(e._id, evento)} className="w-28 text-center mt-3 mb-2 px-3 py-3 text-white bg-red-500 rounded-md focus:bg-red-600 focus:outline-none">Eliminar</button> 
+                    </div>
                 </div> 
                )
             })

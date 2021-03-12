@@ -32,7 +32,7 @@ code {
 
 .contenerdorOpcionesB{
   background-color: rgb(237, 237, 250);
-  padding: 15px;
+  padding: 20px;
   border-radius: 2px;
 }
 
@@ -61,4 +61,34 @@ code {
 
 .landingText{
   text-align: center;
+}
+
+.landingHero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(96, 165, 250);
+}
+
+.contenedorAmarillo {
+  background-color: rgb(252, 211, 77);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 25vw;
+  text-align: center;
+  margin: 20px;
+}
+
+.landingFeatures {
+  display: flex;
+  justify-content: space-around;
+  align-content: center;
+}
+
+.btns-mi-perfil {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
