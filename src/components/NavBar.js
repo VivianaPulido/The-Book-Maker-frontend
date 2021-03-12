@@ -32,16 +32,9 @@ export default function NavBar() {
             <div>
             {usuario ?
             <ul className="list-reset md:flex md:items-center mx-2">
-                <li className="md:ml-4">
-                <Link to="/servicios" className="border-t block no-underline hover:underline py-2 text-white hover:text-black md:border-none md:p-0">Servicios</Link>
-                </li>
-
+                
                 <li className="md:ml-4">
                 <Link to="/calculadora" className="border-t block no-underline hover:underline py-2 text-white hover:text-black md:border-none md:p-0">Calculadora</Link>
-                </li>
-
-                <li className="md:ml-4">
-                <Link to="/tienda" className="border-t block no-underline hover:underline py-2 text-white hover:text-black md:border-none md:p-0">Tienda</Link>
                 </li>
                
                 <li className="md:ml-4">
@@ -55,15 +48,7 @@ export default function NavBar() {
             :
             <ul className="list-reset md:flex md:items-center mx-2">
                 <li className="md:ml-4">
-                <Link to="/servicios" className="border-t block no-underline hover:underline py-2 text-white hover:text-black md:border-none md:p-0">Servicios</Link>
-                </li>
-
-                <li className="md:ml-4">
                 <Link to="/calculadora" className="border-t block no-underline hover:underline py-2 text-white hover:text-black md:border-none md:p-0">Calculadora</Link>
-                </li>
-
-                <li className="md:ml-4">
-                <Link to="/tienda" className="border-t block no-underline hover:underline py-2 text-white hover:text-black md:border-none md:p-0">Tienda</Link>
                 </li>
                 
                 <li className="md:ml-4">
