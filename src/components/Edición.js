@@ -151,7 +151,7 @@ export default function Edición() {
         }
     }
 
-}
+
        
     
 
@@ -161,7 +161,7 @@ export default function Edición() {
 <div className="mx-10">
                 <h2 className="text-white text-xl my-5 bg-blue-600 p-2">Edita tu Libro</h2>
 
-                <form onSubmit= {(e)=> editBook(e, id)}>
+                <form onSubmit={(e)=> editBook(e, id)}>
                 
 
                     <div className="items-center contenerdorOpcionesA">
