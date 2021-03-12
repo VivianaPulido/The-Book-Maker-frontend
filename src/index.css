@@ -105,13 +105,13 @@ code {
   text-transform: uppercase;
   font-size: 2.2rem;
   text-align: center;
-  width: 100%;
+  width: 100vw;
 }
 @media (min-width:768px) {
   .alerta {
-      width: auto;
-      top: 30px;
-      right: 10px;
+      width: 100vw;
+      top: 70px;
+      
       left: auto;
   }
 }
