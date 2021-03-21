@@ -1,23 +1,19 @@
 # The Book Maker
-This is a simple web application created as a project for a bootcamp.
-The concept is for a bussiness that offers the printing of books(of your authorship) on demand, staring from a single copy.
+This is my 3rd module project for the Ironhack Bootcamp.
+It is a website for a bussiness that offers book printing on demand, staring from a single copy.
 It currently features a home, a price calculator and a user profile where you can see your created books(for ordering), edit them and delete them.
 
 The features to be added soon are the shopping cart and all ecommerce functionalities.
 
-## Technologies
-The backend is developed using Express.
-Data base was created with Mongo db.
-Passwords of the users encrypted with bcrypt.
-The front is developed with React, using hooks.
-The documents of the users are stored in cloudinary.
-Style was created with Tailwind and normal CSS.
-The information of the user is brought and sent to the backend and db using Axios.
-The front is desployed in Netlify, the back in Heroku.
+Backend repo: https://github.com/VivianaPulido/The-Book-Maker-Backend
+Deploy: https://bookmaker.netlify.app/
 
-HTML / CSS / Javascript / React / Express / Mongo DB / Tailwind
+## Tools
+* React (using hooks)
+* Express
+* Mongo DB
+* Javascript
+* Nodejs
+* Tailwind
 
-To visit the site:
-https://bookmaker.netlify.app/
-
-*Note: The focus of this project was on the technical part, the design has a great area of improvement for sure, and will be addressed soon.
+*Note: The focus of this project was on the technical part, the design has a great area of improvement for sure, and will be addressed soon.*
