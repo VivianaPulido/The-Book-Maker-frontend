@@ -1,11 +1,11 @@
-#The Book Maker
+# The Book Maker
 This is a simple web application created as a project for a bootcamp.
 The concept is for a bussiness that offers the printing of books(of your authorship) on demand, staring from a single copy.
 It currently features a home, a price calculator and a user profile where you can see your created books(for ordering), edit them and delete them.
 
 The features to be added soon are the shopping cart and all ecommerce functionalities.
 
-##Technologies
+## Technologies
 The backend is developed using Express.
 Data base was created with Mongo db.
 Passwords of the users encrypted with bcrypt.
